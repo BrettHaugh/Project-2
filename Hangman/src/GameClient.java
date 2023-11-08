@@ -24,14 +24,13 @@ public class GameClient {
         outToServer.writeBytes(message+"\n");
         
         String resultFromServer = inFromServer.nextLine();
+        System.out.println(resultFromServer);
         if(resultFromServer == "") {
             gui.addMiss(resultFromServer);
             guessCounter += 1;
         }
         else {
-            for(int i=0; i<resultFromServer.length(); i++){
-                gui.addLetter(message.charAt(0), resultFromServer.indexOf(message));
-            } 
+            gui.addLetter(message.charAt(0), resultFromServer.indexOf(message)); 
         }
 
         if(gui.isNotSolved() == false){
