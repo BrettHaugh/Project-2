@@ -28,6 +28,7 @@ public class GameClient {
         System.out.println(resultFromServer);
         StringTokenizer token = new StringTokenizer(resultFromServer, " ");
         System.out.println(token);
+        int index = Integer.parseInt(token.nextToken());
 
         if(resultFromServer == "") {
             gui.addMiss(resultFromServer);
@@ -35,9 +36,7 @@ public class GameClient {
         }
         else {
             while(token.hasMoreTokens()){
-                int index = Integer.parseInt(token.nextToken());
-                char letter = token.nextToken().charAt(0);
-                gui.addLetter(letter, index);
+                gui.addLetter(message.charAt(0), index);
                 System.out.println(token.countTokens());
             }
         }
