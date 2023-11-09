@@ -2,6 +2,7 @@ import java.io.DataOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class GameClient {
     public static void main(String[] args) throws Exception {
@@ -25,13 +26,22 @@ public class GameClient {
         
         String resultFromServer = inFromServer.nextLine();
         System.out.println(resultFromServer);
+        StringTokenizer token = new StringTokenizer(resultFromServer, " ");
+        System.out.println(token);
+        int index = Integer.parseInt(token.nextToken());
+
         if(resultFromServer == "") {
             gui.addMiss(resultFromServer);
             guessCounter += 1;
         }
         else {
-            gui.addLetter(message.charAt(0), resultFromServer.indexOf(message)); 
+            while (token.hasMoreTokens()) {
+                gui.addLetter(message.charAt(0), index);
+                System.out.println(token.countTokens());
+                index = Integer.parseInt(token.nextToken());
+            } 
         }
+        
 
         if(gui.isNotSolved() == false){
             if(guessCounter == 6){

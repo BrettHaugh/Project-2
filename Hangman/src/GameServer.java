@@ -16,19 +16,18 @@ public class GameServer {
         Socket serverSocket = welcomeSocket.accept(); //creates a connection to client
         DataOutputStream sendSecretWord = new DataOutputStream(serverSocket.getOutputStream());
         sendSecretWord.writeByte(secretWord.getLength());
+        Scanner inFromClient = new Scanner(serverSocket.getInputStream());
         
         while(true) {
-    
-            Scanner inFromClient = new Scanner(serverSocket.getInputStream());
             String message = inFromClient.nextLine(); //read message from client
             DataOutputStream outToClient = new DataOutputStream(serverSocket.getOutputStream());
-            if(message == "You Win!"){
+            if(message.equals("You Win!")){
                 //close sockets & streams
                 serverSocket.close();
                 inFromClient.close();
                 outToClient.close();
             }
-            else if(message == "You Lose!"){
+            else if(message.equals("You Lose!")){
                 System.out.println("The word was "+secretWord.getWord());
                 //close sockets & streams
                 serverSocket.close();
