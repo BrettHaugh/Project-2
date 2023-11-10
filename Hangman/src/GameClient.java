@@ -18,7 +18,7 @@ public class GameClient {
         int temp = Integer.parseInt(inFromServer.nextLine());
         GUI gui = new GUI(temp);
         
-        while(gui.isNotSolved() && guessCounter <= 6){
+        while(gui.isNotSolved() && guessCounter != 6){
             System.out.println("Enter your guess: ");
 
             //DataInputStream recv = new DataInputStream();
@@ -44,21 +44,20 @@ public class GameClient {
             
 
             if(gui.isNotSolved() == false){
-                if(guessCounter > 6){
-                    System.out.println(loss);
-                    outToServer.writeBytes(loss+"\n");
-                }
-                else{
-                    System.out.println(win);
-                    outToServer.writeBytes(win+"\n");
-                }
-            
-
+                clientSocket.close();
+                inFromServer.close();
+                inFromUser.close();
+            }
+            if(guessCounter == 6){
+                System.out.println(loss);
+                outToServer.writeBytes(loss+"\n");
+            }
+            else{
+                System.out.println(win);
+                outToServer.writeBytes(win+"\n");  
+            }
+            outToServer.close();
+        
         }
-        clientSocket.close();
-        outToServer.close();
-        inFromServer.close();
-        inFromUser.close();
     }
-}
 }
