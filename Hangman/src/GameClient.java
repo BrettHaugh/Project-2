@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class GameClient {
     public static void main(String[] args) throws Exception {
-
         
         Scanner inFromUser = new Scanner(System.in); //for user input
         Socket clientSocket = new Socket("localhost", 6789); //make connection to server
@@ -27,7 +26,7 @@ public class GameClient {
         System.out.println(resultFromServer);
         String[] index = resultFromServer.split(" ");
 
-        if(resultFromServer == "") {
+        if(resultFromServer.equals("")) {
             gui.addMiss(resultFromServer);
             guessCounter += 1;
         }
