@@ -1,3 +1,4 @@
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -15,40 +16,46 @@ public class GameClient {
       
 
         Scanner inFromServer = new Scanner(clientSocket.getInputStream());
-        GUI gui = new GUI(4);
-        System.out.println("Enter your guess: ");
-
-        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-        String message = inFromUser.nextLine();
-        outToServer.writeBytes(message+"\n");
+        int temp = Integer.parseInt(inFromServer.nextLine());
+        GUI gui = new GUI(temp);
         
-        String resultFromServer = inFromServer.nextLine();
-        System.out.println(resultFromServer);
-        String[] index = resultFromServer.split(" ");
+        while(gui.isNotSolved() && guessCounter <= 6){
+            System.out.println("Enter your guess: ");
 
-        if(resultFromServer.equals("")) {
-            gui.addMiss(resultFromServer);
-            guessCounter += 1;
-        }
-        else {
-            for(int i=0; i<index.length; i++){
-                int newIndex = Integer.parseInt(index[i]);
-                gui.addLetter(message.charAt(0), newIndex);
-            }
-        }
-        
+            //DataInputStream recv = new DataInputStream();
+            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            String message = inFromUser.nextLine();
+            outToServer.writeBytes(message+"\n");
+            
+            
+            String resultFromServer = inFromServer.nextLine();
+            System.out.println(resultFromServer);
+            String[] index = resultFromServer.split(" ");
 
-        if(gui.isNotSolved() == false){
-            if(guessCounter == 6){
-                System.out.println(loss);
-                outToServer.writeBytes(loss+"\n");
+            if(resultFromServer.equals("")) {
+                gui.addMiss(resultFromServer);
+                guessCounter += 1;
             }
-            else{
-                System.out.println(win);
-                outToServer.writeBytes(win+"\n");
+            else {
+                for(int i=0; i<index.length; i++){
+                    int newIndex = Integer.parseInt(index[i]);
+                    gui.addLetter(message.charAt(0), newIndex);
+                }
             }
-        }
+            
 
+            if(gui.isNotSolved() == false){
+                if(guessCounter > 6){
+                    System.out.println(loss);
+                    outToServer.writeBytes(loss+"\n");
+                }
+                else{
+                    System.out.println(win);
+                    outToServer.writeBytes(win+"\n");
+                }
+            
+
+        }
         clientSocket.close();
         outToServer.close();
         inFromServer.close();

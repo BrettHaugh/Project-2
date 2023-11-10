@@ -15,7 +15,8 @@ public class GameServer {
         Word secretWord = new Word("test");
         Socket serverSocket = welcomeSocket.accept(); //creates a connection to client
         DataOutputStream sendSecretWord = new DataOutputStream(serverSocket.getOutputStream());
-        sendSecretWord.writeByte(secretWord.getLength());
+        sendSecretWord.writeBytes(secretWord.getLength()+"\n");
+        System.out.println("Word Length: "+secretWord.getLength());
         Scanner inFromClient = new Scanner(serverSocket.getInputStream());
         
         while(true) {
