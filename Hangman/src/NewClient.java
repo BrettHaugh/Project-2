@@ -21,6 +21,11 @@ public class NewClient {
         String correctness = responseFromServer.nextLine();
         System.out.println(correctness);
 
+        Scanner nextResponseFromServer = new Scanner(clientSocket.getInputStream());
+        String wordProgress = nextResponseFromServer.nextLine();
+        System.out.println(wordProgress);
+
+
         clientSocket.close();
         outToServer.close();
         responseFromServer.close();

@@ -28,11 +28,11 @@ public class NewServer {
         //System.out.println(word);
         System.out.println(InetAddress.getLocalHost());
         
-        String hiddenWord = "";
+        ArrayList<String> hiddenWord = new ArrayList<>();
         for(int i=0; i<word.size(); i++){
-            hiddenWord += "*";
+            hiddenWord.add("*");
         }
-
+        String tempString = hiddenWord.toString();
          
         //Recognizing and responding to letter message 
         while(true) {
@@ -44,22 +44,24 @@ public class NewServer {
             DataOutputStream responseToGuess = new DataOutputStream(serverSocket.getOutputStream());
             DataOutputStream sendProgress = new DataOutputStream(serverSocket.getOutputStream());
             
+            //System.out.println(updatedGuess.charAt(0));
             if(word.containsValue(updatedGuess.charAt(0))){
                 correctness = true;
-                for(int i=0; i<hiddenWord.length(); i++){
+                for(int i=0; i<hiddenWord.size(); i++){
                     if(word.get(i) == updatedGuess.charAt(0)){
-                        hiddenWord.replace(hiddenWord.charAt(i), updatedGuess.charAt(0));
+                        hiddenWord.add(i, updatedGuess);
                     }
                 }
+                tempString = hiddenWord.toString();
                 responseToGuess.writeBytes("Correct");
             }
             else{
                 correctness = false;
                 responseToGuess.writeBytes("Incorrect");
             }
-            
-            //responseToGuess.writeBytes("Correct");
-            //sendProgress.writeBytes(hiddenWord);
+            System.out.println(tempString);
+            responseToGuess.writeBytes("Correct");
+            sendProgress.writeBytes(hiddenWord.toString());
 
 
             //close sockets & streams
