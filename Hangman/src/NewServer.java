@@ -61,7 +61,7 @@ public class NewServer {
             }
             System.out.println(tempString);
             responseToGuess.writeBytes("Correct");
-            sendProgress.writeBytes(hiddenWord.toString());
+            sendProgress.writeBytes(tempString);
 
 
             //close sockets & streams
