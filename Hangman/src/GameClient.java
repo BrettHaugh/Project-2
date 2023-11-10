@@ -1,3 +1,7 @@
+//Brett Haugh & Shawn Harriett
+//CMSCI 355 A
+//Project 2
+
 import java.io.DataOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
