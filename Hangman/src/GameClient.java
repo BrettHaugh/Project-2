@@ -34,7 +34,7 @@ public class GameClient {
         else {
             for(int i=0; i<index.length; i++){
                 int newIndex = Integer.parseInt(index[i]);
-                gui.addLetter(message.charAt(0), newIndex);
+                gui.addLetter(message.charAt(1), newIndex);
             }
         }
         
