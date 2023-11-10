@@ -44,20 +44,26 @@ public class GameClient {
             
 
             if(gui.isNotSolved() == false){
-                clientSocket.close();
-                inFromServer.close();
-                inFromUser.close();
+                if(guessCounter == 6){
+                    System.out.println(loss);
+                    outToServer.writeBytes(loss+"\n");
+
+                    clientSocket.close();
+                    outToServer.close();
+                    inFromServer.close();
+                    inFromUser.close();
+                }
+                else{
+                    System.out.println(win);
+                    outToServer.writeBytes(win+"\n");
+
+                    clientSocket.close();
+                    outToServer.close();
+                    inFromServer.close();
+                    inFromUser.close();
+                }
+
             }
-            if(guessCounter == 6){
-                System.out.println(loss);
-                outToServer.writeBytes(loss+"\n");
-            }
-            else{
-                System.out.println(win);
-                outToServer.writeBytes(win+"\n");  
-            }
-            outToServer.close();
-        
         }
     }
 }
