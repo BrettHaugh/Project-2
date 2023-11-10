@@ -10,7 +10,7 @@ public class GameClient {
         Socket clientSocket = new Socket("localhost", 6789); //make connection to server
         System.out.println(InetAddress.getLocalHost()); //Print out IP address & hostname of connected server
         String win = "You Win!";
-        String loss = "You Lose";
+        String loss = "You Lose!";
         int guessCounter = 0;
       
 
