@@ -2,6 +2,7 @@ import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
+import java.io.File;
 
 public class GameServer {
     public static void main(String[] args) throws Exception {
@@ -12,7 +13,9 @@ public class GameServer {
         */
         ServerSocket welcomeSocket = new ServerSocket(6789);
         System.out.println("Server connected. The game is now live.");
-        Word secretWord = new Word("test");
+
+        File file = new File("WordBank.txt");
+        Word secretWord = new Word(new Scanner(file));
         Socket serverSocket = welcomeSocket.accept(); //creates a connection to client
         DataOutputStream sendSecretWord = new DataOutputStream(serverSocket.getOutputStream());
         sendSecretWord.writeBytes(secretWord.getLength()+"\n");

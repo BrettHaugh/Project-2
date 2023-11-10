@@ -31,8 +31,8 @@ public class GameClient {
             System.out.println(resultFromServer);
             String[] index = resultFromServer.split(" ");
 
-            if(resultFromServer.equals("")) {
-                gui.addMiss(resultFromServer);
+            if(resultFromServer.equals("")) { //change to message
+                gui.addMiss(message);
                 guessCounter += 1;
             }
             else {
