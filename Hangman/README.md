@@ -1,18 +1,26 @@
-## Getting Started
+# TCP Hangman Project
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Created by Brett Haugh & Shawn Harriett
+
+This is a version of the game "Hangman" that uses a TCP server to allow users to connect to the client. The GUI and Word Java classes were provided by our professor. Our job was to implement a server and client that would A) allow for players to connect and play  B) utilize the classes give to us to create a user-friendly experience.
+
+## Server.java Responsibilites
+- Initializing TCP sockets
+- Initializing the word and sending starting message
+- Recognizing and responding to letter guesses from client
+- Recognizing and responding to won/lost message from client
+## Client.java Responsibilites
+- Contacting server and obtaining/displaying hostname IP address
+- Creating and sending letter guesses to the server
+- Processing list of positions of a letter
+- Continuing play if the conditions for the game ending have not been met
+- Recognizing and processing win and sending it to the server
+- Recognizing and processing loss and sending it to the server
+
 
 ## Folder Structure
 
-The workspace contains two folders by default, where:
+## Class Breakdown
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Coding Implementation
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
